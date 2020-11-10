@@ -19,7 +19,37 @@ Bonus: count separately each vowel
 """
 
 def ex06():
-    #Write your code here
+    # Create a dictionnary that holds the number of occurences for each vowel
+    vowel_count = {
+        "a": 0,
+        "e": 0,
+        "i": 0,
+        "o": 0,
+        "u": 0,
+        "y": 0,
+        "Total": 0
+    }
+
+    with open("test.txt", "r") as file: # This is a good way to open a file.
+        for line in file.readlines(): # for each line of a file...
+            if "42" in line:
+                print(line, end="")
+            for i in line: # for each character of a line...
+                try:
+                    vowel_count[i] += 1
+                except KeyError:
+                    pass # ignore the error if the character is not a vowel
+                except Exception:
+                    exit(84) # do not ignore other (unknown) errors
+    print()
+
+    for item in vowel_count.items():
+        if item[0] != "Total":
+            vowel_count["Total"] += item[1]
+
+    for key, value in vowel_count.items():
+        print("{}: {}".format(key, value))
+
 
 #Test
 if __name__ == "__main__":

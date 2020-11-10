@@ -43,7 +43,46 @@ Hints:
 --------------------------------------------------------------------------------
 """
 
-#Write your code hereunder
+
+class Weapon():
+    name = "Weapon"
+    def __init__(self, name, damage):
+        self.name = name
+        self.damage = damage
+        self.range = "Melee"
+
+    @classmethod
+    def getClassName(cls):
+        return cls.__name__
+
+    def attack(self):
+        return self.damage
+
+    def isMelee(self):
+        return self.range == "Melee"
+
+    def isRange(self):
+        return self.range == "Range"
+
+
+class Sword(Weapon):
+    name = "Sword"
+    def __init__(self, name, damage):
+        Weapon.__init__(self, name, damage)
+
+    def slash(self):
+        return self.damage * 2
+
+
+class Bow(Weapon):
+    name = "Bow"
+    def __init__(self, name, damage):
+        Weapon.__init__(self, name, damage)
+        self.range = "Range"
+
+    def shoot(self):
+        return self.damage * 1.5
+
 
 if __name__ == "__main__":
     try:

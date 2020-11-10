@@ -21,7 +21,15 @@ If you encounter the letter 'z', your program must give out an 'a'.
 
 
 def ex04():
-    #Write your code here
+    s = input("A string: ")
+    for c in s:
+        if c == "z" or c == "Z":
+            print(chr(ord(c) - 25), end="")
+        elif c.isalpha():
+            print(chr(ord(c) + 1), end="")
+        else:
+            print(c, end="")
+    print()
 
 #Test
 if __name__ == "__main__":

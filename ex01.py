@@ -14,10 +14,7 @@ Hint: You can declare multiple variables on the same line !
 """
 
 def my_swap(a, b):
-    #Write your code here
-    
-
-    #Don't worry about that
+    a, b = b, a
     return (a, b)
 
 

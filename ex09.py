@@ -104,7 +104,115 @@ Spend some time reading the outputs expected and the main provided !
 --------------------------------------------------------------------------------
 """
 
-#Write your code hereunder
+
+class Weapon():
+    name = "Weapon"
+
+    def __init__(self, name, damage):
+        self.name = name
+        self.damage = damage
+
+    @classmethod
+    def getClassName(cls):
+        return cls.__name__
+
+
+class Sword(Weapon):
+    name = "Sword"
+
+    def __init__(self, name, damage):
+        Weapon.__init__(self, name, damage)
+
+
+class Scepter(Weapon):
+    name = "Scepter"
+
+    def __init__(self, name, damage):
+        Weapon.__init__(self, name, damage)
+
+
+class Entity():
+    name = "Entity"
+
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+        self.weapon = None
+        print("{} join the summoner's rift !".format(self.name))
+
+    def __repr__(self):
+        return "{}: {} hp".format(self.name, self.hp)
+
+    @classmethod
+    def getClassName(cls):
+        return cls.__name__
+
+    def isAlive(self):
+        return self.hp >= 0
+
+    def hit(self, damage):
+        self.hp -= damage
+        return
+
+    def equip(self, weapon):
+        if self.getClassName() == "Warrior" and weapon.getClassName() != "Sword":
+            print("{} cannot fight with a {}, he is a {} !".format(self.name, weapon.getClassName(), self.getClassName()))
+            return False
+        elif self.getClassName() == "Mage" and weapon.getClassName() != "Scepter":
+            print("{} cannot fight with a {}, he is a {} !".format(self.name, weapon.getClassName(), self.getClassName()))
+            return False
+        elif self.weapon:
+            print("{} has already a weapon equipped !".format(self.name))
+            return False
+        self.weapon = weapon
+        return True
+
+    def unequip(self):
+        if self.weapon:
+            print("{} unequiped {} !".format(self.name, self.weapon.name))
+            self.weapon = None
+            return True
+        print("{} don't have weapon equiped !".format(self.name))
+        return False
+
+
+class Warrior(Entity):
+    name = "Warrior"
+
+    def __init__(self, name, hp, strength):
+        Entity.__init__(self, name, hp)
+        self.strength = strength
+
+    def attack(self, target):
+        if issubclass(type(target), Entity) == False:
+            print("{} attack an invalid target !".format(self.name))
+            return False
+        if self.weapon == None:
+            target.hit(self.strength)
+        else:
+            target.hit(self.weapon.damage + self.strength)
+        print("{} attacked {} !".format(self.name, target.name))
+        return True
+
+
+class Mage(Entity):
+    name = "Mage"
+
+    def __init__(self, name, hp, power):
+        Entity.__init__(self, name, hp)
+        self.power = power
+
+    def attack(self, target):
+        if issubclass(type(target), Entity) == False:
+            print("{} attack an invalid target !".format(self.name))
+            return False
+        if self.weapon:
+            target.hit(self.weapon.damage + self.power)
+            print("{} attacked {} !".format(self.name, target.name))
+            return True
+        print("{} cannot attack without a Scepter !".format(self.name))
+        return False
+
 
 if __name__ == "__main__":
     try:

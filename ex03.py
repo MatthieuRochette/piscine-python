@@ -25,9 +25,10 @@ Bonus : Try to do it in only one line of code !
 """
 
 #Do your imports hereunder
+from sys import argv as av
 
 def print_args():
-    #Write your program hereunder
+    print(*av, sep=" ")
 
 #Tests
 if __name__ == "__main__":

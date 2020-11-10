@@ -20,7 +20,11 @@ You should manage exceptions in order to handle the division by zero !
 """
 
 #Write your code hereunder
-
+def my_divide(a, b):
+    try:
+        return a / b
+    except:
+        return 0
 
 #Tests
 if __name__ == "__main__":
